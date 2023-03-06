@@ -1,9 +1,22 @@
 import styled from "styled-components";
 import { validUrlCharacters } from "@/data/valid-url-characters";
+import { initialUrls } from "@/data/initial-urls";
 import { useState } from "react";
+import Link from "next/link";
 
-export default function Home() {
-  const [urls, setUrls] = useState([]);
+function generateID() {
+  let randomText = "";
+  for (let i = 5; i > 0; i--) {
+    randomText += validUrlCharacters.at(
+      Math.floor(Math.random() * validUrlCharacters.length)
+    );
+  }
+  return randomText;
+}
+
+export default function Home({ shortUrls, setShortUrls }) {
+  //const [urls, setUrls] = useState([]);
+  //const [shortUrls, setShortUrls] = useState(initialUrls);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,23 +27,37 @@ export default function Home() {
     const { input } = data;
 
     // Store Value in Object
-    setUrls([...urls, { input }]);
-    console.log(urls);
+    //setUrls([...urls, { longURL: input }]);
+    //console.log(urls);
+
+    // Verketten von Events bei Klick (Get Value, Store Value, create new Array with short-ID, ...)
+    // Extend later with ID and other stuff -  or at another point?
+    shortUrls.map((element) => {
+      const shortURL = generateID();
+      setShortUrls([
+        ...shortUrls,
+        { ...element, longURL: input, shortURL: shortURL, id: shortURL },
+      ]);
+      console.log(`Index Datei:`);
+      console.log(shortUrls);
+    });
 
     // random ShortURL
-    let randomText = "";
-    for (let i = 5; i > 0; i--) {
-      randomText += validUrlCharacters.at(
-        Math.floor(Math.random() * validUrlCharacters.length)
-      );
-    }
+    event.target.reset();
   };
 
   return (
     <main>
       <Heading>Paste a long URL and click the Shorten-Button</Heading>
       <form onSubmit={handleSubmit}>
-        <input name="input" id="input" required placeholder="Enter Link here" />
+        {/*         Wie kann ich in einer Form nur URLs zulassen? */}
+        <input
+          name="input"
+          id="input"
+          type="url"
+          required
+          placeholder="https://google.com"
+        />
         <button>Shorten URL</button>
       </form>
       <p>
@@ -38,8 +65,13 @@ export default function Home() {
         link to the Dashboard to see all links.
       </p>
       <ul>
-        {urls.map((entry) => (
-          <li>{entry.input}</li>
+        {shortUrls.map((url) => (
+          <li key={url.id}>
+            <h6>Long URL: {url.longURL}</h6>
+            <Link href={url.longURL} target="_blank">
+              {`short.link/${url.shortURL}`}
+            </Link>
+          </li>
         ))}
       </ul>
     </main>
