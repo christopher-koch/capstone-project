@@ -11,16 +11,14 @@ function generateID() {
   }
   return randomText;
 }
+//Get value from input
+const formData = new FormData(event.target);
+const data = Object.fromEntries(formData);
+const { input } = data;
 
 export default function Home({ shortUrls, setShortUrls }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Get Value from Input
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    const { input } = data;
-
-    // Verketten von Events bei Klick (Get Value, Store Value, create new Array with short-ID, ...)
     // Extend later with ID and other stuff -  or at another point?
     shortUrls.map((element) => {
       const shortURL = generateID();
@@ -28,10 +26,7 @@ export default function Home({ shortUrls, setShortUrls }) {
         ...shortUrls,
         { ...element, longURL: input, shortURL: shortURL, id: shortURL },
       ]);
-      console.log(`Index Datei:`);
-      console.log(shortUrls);
     });
-
     event.target.reset();
   };
 
