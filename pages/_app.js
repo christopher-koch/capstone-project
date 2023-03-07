@@ -1,15 +1,12 @@
 import GlobalStyle from "@/styles";
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { initialUrls } from "@/data/initial-urls";
 
 export default function App({ Component, pageProps }) {
-  const [shortUrls, setShortUrls] = useState(initialUrls);
-  useEffect(() => {
-    setShortUrls(shortUrls);
-    console.log("app js datei:");
-    console.log(shortUrls);
-  }, [shortUrls]);
+  const [shortUrls, setShortUrls] = useLocalStorageState("shortUrls", {
+    defaultValue: initialUrls,
+  });
 
   return (
     <>
