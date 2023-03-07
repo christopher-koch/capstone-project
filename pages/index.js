@@ -29,9 +29,7 @@ export default function Home({ shortUrls, setShortUrls }) {
       { longURL: input, shortURL: shortURL, id: shortURL },
     ]);
     if (newUrl.protocol === "http:" || newUrl.protocol === "https:") {
-      console.log("Yay!");
-      setSuccessForm(!false);
-      console.log(successForm);
+      setSuccessForm(true);
     }
     event.target.reset();
   };
