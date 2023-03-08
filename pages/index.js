@@ -27,7 +27,7 @@ export default function Home({ shortUrls, setShortUrls }) {
     // Extend later with ID and other stuff - or at another point?
     setShortUrls([
       ...shortUrls,
-      { longURL: input, shortURL: shortURL, id: shortURL },
+      { longURL: input, shortURL: shortURL, id: shortURL, count: 0 },
     ]);
     if (newUrl.protocol === "http:" || newUrl.protocol === "https:") {
       setSuccessForm(true);

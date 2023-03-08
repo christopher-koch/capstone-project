@@ -1,10 +1,10 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function UrlList({ shortUrls, setShortUrls }) {
   const [editing, setEditing] = useState(false);
-  console.log(shortUrls);
 
   const handleDelete = (e) => {
     console.log(e);
@@ -33,14 +33,32 @@ export default function UrlList({ shortUrls, setShortUrls }) {
     }
   };
 
+  const handleLinkClick = (e) => {
+    setShortUrls(
+      shortUrls.map((url) => {
+        if (url.id === e.target.id) {
+          return { ...url, count: url.count + 1 };
+        } else {
+          return url;
+        }
+      })
+    );
+    console.log(shortUrls);
+  };
+
   return (
     <UnorderedList>
       {shortUrls.map((url) => (
         <ListItem key={url.id}>
           <Span>{url.longURL}</Span>
           <Span>
-            <Link href={url.longURL} target="_blank">
-              {`short.link/${url.shortURL}`}
+            <Link
+              id={url.id}
+              href={url.longURL}
+              target="_blank"
+              onClick={(e) => handleLinkClick(e)}
+            >
+              {`sho.rt/${url.shortURL}`}
             </Link>
           </Span>
           <button id={url.id} onClick={(e) => handleDelete(e)}>
@@ -57,7 +75,7 @@ export default function UrlList({ shortUrls, setShortUrls }) {
               onKeyDown={(e) => handleEditDone(e, url.id)}
             />
           )}
-          <Span>0 Clicks</Span>
+          <Span>{url.count} Clicks</Span>
         </ListItem>
       ))}
     </UnorderedList>
@@ -72,12 +90,14 @@ const UnorderedList = styled.ul`
 const ListItem = styled.li`
   display: flex;
   flex-wrap: nowrap;
-  gap: 0.8rem;
+  gap: 1.4rem;
 `;
 
 const Span = styled.span`
   text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
+  max-width: 200px;
 `;
 
 const Input = styled.input`
