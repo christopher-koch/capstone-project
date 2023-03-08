@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useState } from "react";
-import useLocalStorageState from "use-local-storage-state";
 
 export default function UrlList({ shortUrls, setShortUrls }) {
   const [editing, setEditing] = useState(false);
@@ -46,21 +45,32 @@ export default function UrlList({ shortUrls, setShortUrls }) {
     console.log(shortUrls);
   };
 
+  const handleCopy = (e) => {
+    console.log(e.target);
+  };
+
   return (
     <UnorderedList>
       {shortUrls.map((url) => (
         <ListItem key={url.id}>
           <Span>{url.longURL}</Span>
-          <Span>
-            <Link
-              id={url.id}
-              href={url.longURL}
-              target="_blank"
-              onClick={(e) => handleLinkClick(e)}
-            >
-              {`sho.rt/${url.shortURL}`}
-            </Link>
-          </Span>
+          <Link
+            id={url.link}
+            href={url.longURL}
+            target="_blank"
+            onClick={(e) => handleLinkClick(e)}
+          >
+            {`http://localhost:3000/${url.shortURL}`}
+          </Link>
+          <button
+            onClick={() =>
+              navigator.clipboard.writeText(
+                `http://localhost:3000/${url.shortURL}`
+              )
+            }
+          >
+            Copy
+          </button>
           <button id={url.id} onClick={(e) => handleDelete(e)}>
             Delete
           </button>
