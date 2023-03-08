@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useState } from "react";
+import { VscTrash } from "react-icons/vsc";
+import { VscEdit } from "react-icons/vsc";
+import { VscCopy } from "react-icons/vsc";
 
 export default function UrlItem({
   id,
@@ -63,17 +66,18 @@ export default function UrlItem({
           {`BASEURL/${shortURL}`}
         </Link>
         <button
+          className="icon"
           onClick={() =>
             navigator.clipboard.writeText(`localhost:3000/${shortURL}`)
           }
         >
-          Copy
+          <VscCopy />
         </button>
         <button id={id} onClick={(e) => handleDelete(e)}>
-          Delete
+          <VscTrash className="icon" />
         </button>
         <button id={id} onClick={() => handleEdit()}>
-          Edit
+          <VscEdit className="icon" />
         </button>
         {editing === false ? null : (
           <Input

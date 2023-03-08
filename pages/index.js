@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import { validUrlCharacters } from "@/data/valid-url-characters";
 import { useState } from "react";
 import UrlItem from "@/components/UrlList/UrlItem";
+import Link from "next/link";
 
 function generateID() {
   let randomText = "";
@@ -32,13 +32,21 @@ export default function Home({ shortUrls, setShortUrls }) {
     if (newUrl.protocol === "http:" || newUrl.protocol === "https:") {
       setSuccessForm(true);
     }
-    console.log(lastItem);
     event.target.reset();
   };
 
   return (
     <main>
-      <Heading>Paste a long URL and click the Shorten-Button</Heading>
+      <h1>Shorten Urls</h1>
+      <p>
+        Enter a long Url and press the Button to shorten it! You can see all
+        shortened Links on the{" "}
+        {
+          <Link href="/dashboard" aria-label="Link to Overview Page">
+            Overview Page
+          </Link>
+        }
+      </p>
       <form onSubmit={handleSubmit} aria-label="URL Shortener Form">
         <input
           name="input"
@@ -47,13 +55,9 @@ export default function Home({ shortUrls, setShortUrls }) {
           required
           placeholder="https://google.com"
         />
-        <button>Shorten URL</button>
+        <button className="cool-button">Shorten URL</button>
       </form>
       {successForm === true ? <p>URL was shortened successfully!</p> : null}
-      <p>
-        Here will stand some additional info about this service. For example, a
-        link to the Dashboard to see all links.
-      </p>
       {successForm === false ? null : (
         <UrlItem
           key={lastItem.id}
@@ -68,7 +72,3 @@ export default function Home({ shortUrls, setShortUrls }) {
     </main>
   );
 }
-
-const Heading = styled.h1`
-  text-align: center;
-`;
