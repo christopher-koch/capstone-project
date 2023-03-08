@@ -66,12 +66,11 @@ export default function UrlItem({
           {`BASEURL/${shortURL}`}
         </Link>
         <button
-          className="icon"
           onClick={() =>
             navigator.clipboard.writeText(`localhost:3000/${shortURL}`)
           }
         >
-          <VscCopy />
+          <VscCopy className="icon" />
         </button>
         <button id={id} onClick={(e) => handleDelete(e)}>
           <VscTrash className="icon" />
