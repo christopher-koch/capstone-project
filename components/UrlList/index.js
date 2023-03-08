@@ -56,13 +56,11 @@ export default function UrlList({ shortUrls, setShortUrls }) {
             target="_blank"
             onClick={(e) => handleLinkClick(e)}
           >
-            {`http://localhost:3000/${url.shortURL}`}
+            {`BASEURL/${url.shortURL}`}
           </Link>
           <button
             onClick={() =>
-              navigator.clipboard.writeText(
-                `http://localhost:3000/${url.shortURL}`
-              )
+              navigator.clipboard.writeText(`BASEURL/${url.shortURL}`)
             }
           >
             Copy
