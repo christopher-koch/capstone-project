@@ -6,6 +6,7 @@ export default createGlobalStyle`
   *::after {
     box-sizing: border-box;
     margin: 0;
+    padding: 0
   }
 
   body {
@@ -25,9 +26,23 @@ export default createGlobalStyle`
     border: none;
   }
 
+  .link {
+    text-align: center;
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .active {
+    background-color: #f0f0f0;
+  }
+
   .icon{
     font-size: 1.2rem;
     pointer-events: none;
+  }
+
+  .menu-active {
+    background: #111;
   }
 
   .cool-button:hover {

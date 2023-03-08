@@ -2,21 +2,30 @@ import Link from "next/link";
 import styled from "styled-components";
 import { CiHome } from "react-icons/ci";
 import { CiBoxList } from "react-icons/ci";
+import { useRouter } from "next/router";
 
 export default function Navi() {
+  console.log(Link);
+  const router = useRouter();
+  const currentRoute = router.pathname;
   return (
     <Nav>
       <List>
-        <ListItem>
-          <Link href="/">
-            <CiHome />
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/dashboard">
-            <CiBoxList />
-          </Link>
-        </ListItem>
+        <Link
+          href="/"
+          className={"link" + ` ${currentRoute === "/" ? "active" : ""}`}
+        >
+          <CiHome />
+        </Link>
+
+        <Link
+          href="/dashboard"
+          className={
+            "link" + ` ${currentRoute === "/dashboard" ? "active" : ""}`
+          }
+        >
+          <CiBoxList />
+        </Link>
       </List>
     </Nav>
   );
@@ -43,8 +52,4 @@ const List = styled.ul`
   }
 `;
 
-const ListItem = styled.li`
-  text-align: center;
-  width: 100%;
-  padding: 2rem 0;
-`;
+const ListItem = styled.li``;
