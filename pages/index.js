@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { validUrlCharacters } from "@/data/valid-url-characters";
 import Link from "next/link";
 import { useState } from "react";
+import UrlList from "@/components/UrlList";
 
 function generateID() {
   let randomText = "";
@@ -26,7 +27,7 @@ export default function Home({ shortUrls, setShortUrls }) {
     // Extend later with ID and other stuff - or at another point?
     setShortUrls([
       ...shortUrls,
-      { longURL: input, shortURL: shortURL, id: shortURL },
+      { longURL: input, shortURL: shortURL, id: shortURL, count: 0 },
     ]);
     if (newUrl.protocol === "http:" || newUrl.protocol === "https:") {
       setSuccessForm(true);
@@ -47,21 +48,12 @@ export default function Home({ shortUrls, setShortUrls }) {
         />
         <button>Shorten URL</button>
       </form>
-      {successForm === true ? <p>Du bist der geilste!</p> : null}
+      {successForm === true ? <p>URL was shortened successfully!</p> : null}
       <p>
         Here will stand some additional info about this service. For example, a
         link to the Dashboard to see all links.
       </p>
-      <ul>
-        {shortUrls.map((url) => (
-          <li key={url.id}>
-            <h6>Long URL: {url.longURL}</h6>
-            <Link href={url.longURL} target="_blank">
-              {`short.link/${url.shortURL}`}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <UrlList shortUrls={shortUrls} setShortUrls={setShortUrls} />
     </main>
   );
 }

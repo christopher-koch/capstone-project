@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Link from "next/link";
 
 export default function RedirectComponent({ shortUrls }) {
@@ -8,7 +7,7 @@ export default function RedirectComponent({ shortUrls }) {
   let isShortUrl = true;
 
   shortUrls.find((url) => {
-    id === url.id ? router.push(url.longURL) : (isShortUrl = false);
+    id === url.shortURL ? router.push(url.longURL) : (isShortUrl = false);
   });
 
   return (
