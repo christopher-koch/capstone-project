@@ -32,9 +32,11 @@ export default function Navi() {
 }
 
 const Nav = styled.nav`
+  background-color: #fff;
   position: fixed;
   bottom: 0;
   min-width: 100%;
+  z-index: 100;
 `;
 
 const List = styled.ul`
@@ -51,5 +53,3 @@ const List = styled.ul`
     border: none;
   }
 `;
-
-const ListItem = styled.li``;

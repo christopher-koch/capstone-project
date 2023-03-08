@@ -24,4 +24,6 @@ export default function UrlList({ shortUrls, setShortUrls }) {
 const UnorderedList = styled.ul`
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  gap: 1.4rem;
 `;

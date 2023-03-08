@@ -56,37 +56,41 @@ export default function UrlItem({
   return (
     <>
       <ListItem>
-        <Span>{longURL}</Span>
-        <Link
-          id={id}
-          href={longURL}
-          target="_blank"
-          onClick={(e) => handleLinkClick(e)}
-        >
-          {`BASEURL/${shortURL}`}
-        </Link>
-        <button
-          onClick={() =>
-            navigator.clipboard.writeText(`localhost:3000/${shortURL}`)
-          }
-        >
-          <VscCopy className="icon" />
-        </button>
-        <button id={id} onClick={(e) => handleDelete(e)}>
-          <VscTrash className="icon" />
-        </button>
-        <button id={id} onClick={() => handleEdit()}>
-          <VscEdit className="icon" />
-        </button>
-        {editing === false ? null : (
-          <Input
+        <section>
+          <Span>{longURL}</Span>
+          <Link
             id={id}
-            placeholder={shortURL}
-            type="text"
-            onKeyDown={(e) => handleEditDone(e, id)}
-          />
-        )}
-        <Span>{count} Clicks</Span>
+            href={longURL}
+            target="_blank"
+            onClick={(e) => handleLinkClick(e)}
+          >
+            {`BASEURL/${shortURL}`}
+          </Link>
+        </section>
+        <section>
+          <button
+            onClick={() =>
+              navigator.clipboard.writeText(`localhost:3000/${shortURL}`)
+            }
+          >
+            <VscCopy className="icon" />
+          </button>
+          <button id={id} onClick={(e) => handleDelete(e)}>
+            <VscTrash className="icon" />
+          </button>
+          <button id={id} onClick={() => handleEdit()}>
+            <VscEdit className="icon" />
+          </button>
+          {editing === false ? null : (
+            <Input
+              id={id}
+              placeholder={shortURL}
+              type="text"
+              onKeyDown={(e) => handleEditDone(e, id)}
+            />
+          )}
+          <Span>{count} Clicks</Span>
+        </section>
       </ListItem>
     </>
   );
@@ -94,8 +98,8 @@ export default function UrlItem({
 
 const ListItem = styled.li`
   display: flex;
-  flex-wrap: nowrap;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 `;
 
 const Span = styled.span`

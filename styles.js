@@ -13,18 +13,25 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: system-ui;
+    
   }
 
   main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 375px;
   }
 
   button {
     background: transparent;
     border: none;
     cursor: pointer;
+  }
+
+  section {
+    display: flex;
+    gap: 1rem;
   }
 
   .link {
