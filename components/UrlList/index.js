@@ -45,17 +45,13 @@ export default function UrlList({ shortUrls, setShortUrls }) {
     console.log(shortUrls);
   };
 
-  const handleCopy = (e) => {
-    console.log(e.target);
-  };
-
   return (
     <UnorderedList>
       {shortUrls.map((url) => (
         <ListItem key={url.id}>
           <Span>{url.longURL}</Span>
           <Link
-            id={url.link}
+            id={url.id}
             href={url.longURL}
             target="_blank"
             onClick={(e) => handleLinkClick(e)}
