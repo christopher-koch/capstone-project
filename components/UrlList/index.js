@@ -1,6 +1,4 @@
-import Link from "next/link";
 import styled from "styled-components";
-import { useState } from "react";
 import UrlItem from "./UrlItem";
 
 export default function UrlList({ shortUrls, setShortUrls }) {

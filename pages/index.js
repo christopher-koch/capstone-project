@@ -53,7 +53,7 @@ export default function Home({ shortUrls, setShortUrls }) {
           id="input"
           type="url"
           required
-          placeholder="https://google.com"
+          placeholder="https://paste-long-url.com"
         />
         <button className="cool-button">Shorten URL</button>
       </form>

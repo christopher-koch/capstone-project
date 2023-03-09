@@ -64,13 +64,15 @@ export default function UrlItem({
             target="_blank"
             onClick={(e) => handleLinkClick(e)}
           >
-            {`BASEURL/${shortURL}`}
+            {`${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`}
           </Link>
         </section>
         <section>
           <button
             onClick={() =>
-              navigator.clipboard.writeText(`localhost:3000/${shortURL}`)
+              navigator.clipboard.writeText(
+                `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`
+              )
             }
           >
             <VscCopy className="icon" />
