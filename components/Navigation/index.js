@@ -11,21 +11,16 @@ export default function Navi() {
   return (
     <Nav>
       <List>
-        <Link
-          href="/"
-          className={"link" + ` ${currentRoute === "/" ? "active" : ""}`}
-        >
+        <StyledLink href="/" className={currentRoute === "/" ? "active" : ""}>
           <CiHome />
-        </Link>
+        </StyledLink>
 
-        <Link
+        <StyledLink
           href="/dashboard"
-          className={
-            "link" + ` ${currentRoute === "/dashboard" ? "active" : ""}`
-          }
+          className={currentRoute === "/dashboard" ? "active" : ""}
         >
           <CiBoxList />
-        </Link>
+        </StyledLink>
       </List>
     </Nav>
   );
@@ -52,4 +47,10 @@ const List = styled.ul`
   > *:last-child {
     border: none;
   }
+`;
+
+const StyledLink = styled(Link)`
+  text-align: center;
+  width: 100%;
+  padding: 2rem 0;
 `;
