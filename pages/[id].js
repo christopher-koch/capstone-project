@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function RedirectComponent({ shortUrls }) {
   const router = useRouter();
   const { id } = router.query;
+  console.log(id);
   let isShortUrl = true;
-
   shortUrls.find((url) => {
     id === url.shortURL ? router.push(url.longURL) : (isShortUrl = false);
   });
