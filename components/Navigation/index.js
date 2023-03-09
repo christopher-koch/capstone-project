@@ -5,7 +5,6 @@ import { CiBoxList } from "react-icons/ci";
 import { useRouter } from "next/router";
 
 export default function Navi() {
-  console.log(Link);
   const router = useRouter();
   const currentRoute = router.pathname;
   return (
