@@ -2,38 +2,53 @@ import { validUrlCharacters } from "@/data/valid-url-characters";
 import { useState } from "react";
 import UrlItem from "@/components/UrlList/UrlItem";
 import Link from "next/link";
-
-function generateID() {
-  let randomText = "";
-  for (let i = 5; i > 0; i--) {
-    randomText += validUrlCharacters.at(
-      Math.floor(Math.random() * validUrlCharacters.length)
-    );
-  }
-  return randomText;
-}
+import useSWR from "swr";
+import generateID from "@/utils/generateID";
 
 export default function Home({ shortUrls, setShortUrls }) {
   const [successForm, setSuccessForm] = useState(false);
-  const lastItem = shortUrls.at(-1);
+  const { mutate } = useSWR(`/api/urls`);
+  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
 
-  const handleSubmit = (event) => {
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading data from db...</div>;
+  const lastItem = mongoData.at(-1);
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    const { input } = data;
-    const newUrl = new URL(input);
+    const urlData = Object.fromEntries(formData);
+    const { input } = urlData;
     const shortURL = generateID();
+    const newUrl = new URL(input);
     // Extend later with ID and other stuff - or at another point?
     setShortUrls([
       ...shortUrls,
       { longURL: input, shortURL: shortURL, id: shortURL, count: 0 },
     ]);
+    const newUrlData = { longURL: input, shortURL: shortURL, count: 0 };
+    console.log(newUrlData);
+    const response = await fetch("/api/urls", {
+      method: "POST",
+      body: JSON.stringify(newUrlData),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Status ", data.status);
+      mutate();
+      event.target.reset();
+    } else {
+      console.error("Error", response.status);
+    }
+
     if (newUrl.protocol === "http:" || newUrl.protocol === "https:") {
       setSuccessForm(true);
     }
+
     event.target.reset();
-  };
+  }
 
   return (
     <main>

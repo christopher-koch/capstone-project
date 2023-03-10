@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import UrlItem from "./UrlItem";
+import useSWR from "swr";
 
 export default function UrlList({ shortUrls, setShortUrls }) {
+  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading data from db...</div>;
+
   return (
     <UnorderedList>
-      {shortUrls.map((url) => (
+      {mongoData.map((url) => (
         <UrlItem
           key={url.id}
           longURL={url.longURL}

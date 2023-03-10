@@ -12,12 +12,14 @@
   "dependencies": {
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
+    "mongoose": "^7.0.1",
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-uid": "^2.3.2",
     "styled-components": "^5.3.8",
+    "swr": "^2.1.0",
     "use-local-storage-state": "^18.2.1"
   },
   "devDependencies": {
