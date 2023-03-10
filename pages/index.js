@@ -5,10 +5,16 @@ import Link from "next/link";
 import useSWR from "swr";
 import generateID from "@/utils/generateID";
 
-export default function Home({ shortUrls, setShortUrls }) {
+export default function Home({
+  shortUrls,
+  setShortUrls,
+  error,
+  isLoading,
+  mongoData,
+}) {
   const [successForm, setSuccessForm] = useState(false);
   const { mutate } = useSWR(`/api/urls`);
-  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
+  //const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading data from db...</div>;

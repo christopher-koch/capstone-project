@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function RedirectComponent({ shortUrls }) {
+export default function RedirectComponent({ mongoData }) {
   const router = useRouter();
-  const { id } = router.query;
-  console.log(id);
+  const { id: slug } = router.query;
+  console.log(slug);
   let isShortUrl = true;
-  shortUrls.find((url) => {
-    id === url.shortURL ? router.push(url.longURL) : (isShortUrl = false);
+  mongoData?.find((url) => {
+    slug === url.shortURL ? router.push(url.longURL) : (isShortUrl = false);
   });
 
   return (
@@ -15,7 +15,7 @@ export default function RedirectComponent({ shortUrls }) {
       {isShortUrl === true ? (
         <>
           <h2>Please hold the line.</h2>
-          <p>You are being redirected to {shortUrls.longURL}</p>
+          <p>You are being redirected to {mongoData?.longURL}</p>
         </>
       ) : (
         <p>

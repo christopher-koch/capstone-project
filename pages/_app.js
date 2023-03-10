@@ -4,10 +4,12 @@ import Head from "next/head";
 import useLocalStorageState from "use-local-storage-state";
 import { initialUrls } from "@/data/initial-urls";
 import Navi from "@/components/Navigation";
+import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function App({ Component, pageProps }) {
+  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`, fetcher);
   const [shortUrls, setShortUrls] = useLocalStorageState("shortUrls", {
     defaultValue: initialUrls,
   });
@@ -23,6 +25,9 @@ export default function App({ Component, pageProps }) {
           {...pageProps}
           shortUrls={shortUrls}
           setShortUrls={setShortUrls}
+          mongoData={mongoData}
+          error={error}
+          isLoading={isLoading}
         />
         <Navi />
       </SWRConfig>
