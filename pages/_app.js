@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Capstone Project</title>
       </Head>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig value={{ fetcher, refreshInterval: 5000 }}>
         <Component
           {...pageProps}
           shortUrls={shortUrls}
