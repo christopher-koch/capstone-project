@@ -3,25 +3,16 @@ import { useState } from "react";
 import UrlItem from "@/components/UrlList/UrlItem";
 import Link from "next/link";
 import useSWR from "swr";
-
-function generateID() {
-  let randomText = "";
-  for (let i = 5; i > 0; i--) {
-    randomText += validUrlCharacters.at(
-      Math.floor(Math.random() * validUrlCharacters.length)
-    );
-  }
-  return randomText;
-}
+import generateID from "@/utils/generateID";
 
 export default function Home({ shortUrls, setShortUrls }) {
   const [successForm, setSuccessForm] = useState(false);
-  const lastItem = shortUrls.at(-1);
-  // mutate = neu laden lostreten (?)
   const { mutate } = useSWR(`/api/urls`);
+  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
 
-  const { data } = useSWR(`/api/urls`);
-  console.log(data);
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading data from db...</div>;
+  const lastItem = mongoData.at(-1);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -55,6 +46,7 @@ export default function Home({ shortUrls, setShortUrls }) {
     if (newUrl.protocol === "http:" || newUrl.protocol === "https:") {
       setSuccessForm(true);
     }
+
     event.target.reset();
   }
 
