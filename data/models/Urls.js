@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const UrlSchema = new Schema({
   longURL: String,
-  shortURL: String,
+  shortURL: { type: String, unique: true },
   count: Number,
 });
 

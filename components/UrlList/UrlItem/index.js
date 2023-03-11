@@ -60,18 +60,18 @@ export default function UrlItem({
           <Span>{longURL}</Span>
           <Link
             id={id}
-            href={shortURL}
+            href={`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/${shortURL}`}
             target="_blank"
             onClick={(e) => handleLinkClick(e)}
           >
-            {`${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`}
+            {shortURL}
           </Link>
         </section>
         <section>
           <button
             onClick={() =>
               navigator.clipboard.writeText(
-                `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`
+                `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/${shortURL}`
               )
             }
           >
