@@ -13,6 +13,14 @@ const nextConfig = {
       // },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:slug",
+        destination: "/api/:slug", // The :path parameter isn't used here so will be automatically passed in the query
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
