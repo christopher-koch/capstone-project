@@ -21,9 +21,9 @@ export default function NotAvailable() {
         height={200}
         alt="gandalf shall not pass gif"
       />
-      <h1>This page doesn't exist.</h1>
+      <h1>This page doesn`&apos;`t exist.</h1>
       <p>
-        You'll be redirect automatically to the homepage. If not,{" "}
+        You`&apos;`ll be redirect automatically to the homepage. If not,{" "}
         <Link href="/">click here</Link>
       </p>
     </>
