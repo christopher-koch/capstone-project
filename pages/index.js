@@ -1,9 +1,11 @@
-import { validUrlCharacters } from "@/data/valid-url-characters";
 import { useState } from "react";
 import UrlItem from "@/components/UrlList/UrlItem";
 import Link from "next/link";
 import useSWR from "swr";
 import generateID from "@/utils/generateID";
+import SuccessKid from "../assets/img/success-kid.gif";
+import Image from "next/image";
+import styled from "styled-components";
 
 export default function Home({
   shortUrls,
@@ -57,8 +59,9 @@ export default function Home({
   }
 
   return (
-    <main>
-      <h1>Shorten Urls</h1>
+    <section>
+      <StyledSubHeading>The Amazing</StyledSubHeading>
+      <h1>URL Shortener</h1>
       <p>
         Enter a long Url and press the Button to shorten it! You can see all
         shortened Links on the{" "}
@@ -68,7 +71,7 @@ export default function Home({
           </Link>
         }
       </p>
-      <form onSubmit={handleSubmit} aria-label="URL Shortener Form">
+      <StyledForm onSubmit={handleSubmit} aria-label="URL Shortener Form">
         <input
           name="input"
           id="input"
@@ -77,8 +80,15 @@ export default function Home({
           placeholder="https://paste-long-url.com"
         />
         <button className="cool-button">Shorten URL</button>
-      </form>
-      {successForm === true ? <p>URL was shortened successfully!</p> : null}
+      </StyledForm>
+      {successForm === true ? (
+        <StyledImage
+          alt="success kid gif"
+          src={SuccessKid}
+          width={160}
+          height={120}
+        />
+      ) : null}
       {successForm === false ? null : (
         <UrlItem
           key={lastItem.id}
@@ -90,6 +100,45 @@ export default function Home({
           setShortUrls={setShortUrls}
         />
       )}
-    </main>
+    </section>
   );
 }
+
+const StyledForm = styled.form`
+  background-color: #fff;
+  border: 2px solid var(--text);
+  border-radius: 2px;
+  width: 100%;
+  display: flex;
+  margin: 1.4rem 0;
+  filter: drop-shadow(4px 6px 0 var(--text));
+  > input {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1rem;
+    flex: 2;
+  }
+  > button {
+    background-color: var(--lavender);
+    color: var(--crust);
+    font-weight: 200;
+    font-stretch: 75%;
+    font-variation-settings: "ital" 10, "wdth" 125;
+    padding: 0 1rem;
+  }
+`;
+
+const StyledImage = styled(Image)`
+  filter: drop-shadow(4px 6px 0 var(--text));
+  border-radius: 2px;
+  margin-bottom: 1.4rem;
+`;
+
+const StyledSubHeading = styled.span`
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-stretch: 75%;
+  font-variation-settings: "ital" 10, "wdth" 125;
+  letter-spacing: 0.4rem;
+`;

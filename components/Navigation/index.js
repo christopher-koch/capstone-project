@@ -11,14 +11,14 @@ export default function Navi() {
     <Nav>
       <List>
         <StyledLink href="/" className={currentRoute === "/" ? "active" : ""}>
-          <CiHome />
+          <CiHome className="icon" />
         </StyledLink>
 
         <StyledLink
           href="/dashboard"
           className={currentRoute === "/dashboard" ? "active" : ""}
         >
-          <CiBoxList />
+          <CiBoxList className="icon" />
         </StyledLink>
       </List>
     </Nav>
@@ -26,7 +26,7 @@ export default function Navi() {
 }
 
 const Nav = styled.nav`
-  background-color: #fff;
+  background-color: var(--base);
   position: fixed;
   bottom: 0;
   min-width: 100%;
@@ -37,19 +37,13 @@ const List = styled.ul`
   display: flex;
   justify-content: space-evenly;
   box-sizing: border-box;
-  border: 1px dotted #000;
   font-size: 2rem;
   list-style: none;
-  > * {
-    border-right: 1px dotted #000;
-  }
-  > *:last-child {
-    border: none;
-  }
+  border-top: 1px solid var(--mantle);
 `;
 
 const StyledLink = styled(Link)`
   text-align: center;
   width: 100%;
-  padding: 2rem 0;
+  padding: 1.4rem 0;
 `;
