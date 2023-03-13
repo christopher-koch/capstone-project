@@ -12,7 +12,7 @@ export default async function handler(request, response) {
       url.save();
       return response.redirect(url.longURL);
     } else {
-      return response.status(404);
+      return response.status(404).redirect("/404");
     }
   }
 
