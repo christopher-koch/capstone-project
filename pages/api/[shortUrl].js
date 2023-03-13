@@ -3,9 +3,9 @@ import Url from "@/data/models/Urls";
 
 export default async function handler(request, response) {
   await dbConnect();
+  const { shortUrl } = await request.query;
 
   if (request.method === "GET") {
-    const { shortUrl } = await request.query;
     const url = await Url.findOne({ shortURL: shortUrl });
     if (url) {
       url.count += 1;
@@ -17,9 +17,19 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    const { shortUrl } = await request.query;
     console.log(shortUrl);
     const urlToDelete = await Url.findOneAndDelete({ shortURL: shortUrl });
     response.status(200).json(urlToDelete);
+  }
+
+  if (request.method === "PUT") {
+    const updatedUrl = await Url.findOneAndUpdate(
+      { shortURL: shortUrl },
+      {
+        $set: request.body,
+      }
+    );
+    console.log(updatedUrl);
+    response.status(200).json(updatedUrl);
   }
 }

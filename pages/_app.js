@@ -9,7 +9,12 @@ import useSWR from "swr";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function App({ Component, pageProps }) {
-  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`, fetcher);
+  const {
+    data: mongoData,
+    error,
+    isLoading,
+    mutate,
+  } = useSWR(`/api/urls`, fetcher);
   const [shortUrls, setShortUrls] = useLocalStorageState("shortUrls", {
     defaultValue: initialUrls,
   });
@@ -28,6 +33,7 @@ export default function App({ Component, pageProps }) {
           mongoData={mongoData}
           error={error}
           isLoading={isLoading}
+          mutate={mutate}
         />
         <Navi />
       </SWRConfig>

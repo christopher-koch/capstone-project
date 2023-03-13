@@ -12,6 +12,7 @@ export default function UrlItem({
   count,
   shortUrls,
   setShortUrls,
+  mutate,
 }) {
   const [editing, setEditing] = useState(false);
 
@@ -25,10 +26,18 @@ export default function UrlItem({
     setEditing(!editing);
   };
 
-  const handleEditDone = (event, id) => {
-    if (event.key === "Enter") {
+  const handleEditDone = async (e) => {
+    if (e.key === "Enter") {
       setEditing(!editing);
-      setShortUrls(
+      await fetch(`/api/${e.target.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ ...shortURL, shortURL: e.target.value }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      mutate();
+      /* setShortUrls(
         shortUrls.map((url) => {
           if (url.id === id) {
             return { ...url, shortURL: event.target.value };
@@ -36,7 +45,7 @@ export default function UrlItem({
             return url;
           }
         })
-      );
+      ); */
     }
   };
 
@@ -80,12 +89,12 @@ export default function UrlItem({
           <button id={shortURL} onClick={(e) => handleDelete(e)}>
             <VscTrash className="icon" />
           </button>
-          <button id={id} onClick={() => handleEdit()}>
+          <button id={shortURL} onClick={() => handleEdit()}>
             <VscEdit className="icon" />
           </button>
           {editing === false ? null : (
             <Input
-              id={id}
+              id={shortURL}
               placeholder={shortURL}
               type="text"
               onKeyDown={(e) => handleEditDone(e, id)}

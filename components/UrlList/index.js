@@ -2,7 +2,7 @@ import styled from "styled-components";
 import UrlItem from "./UrlItem";
 import useSWR from "swr";
 
-export default function UrlList({ shortUrls, setShortUrls }) {
+export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
 
   if (error) return <div>failed to load</div>;
@@ -19,6 +19,7 @@ export default function UrlList({ shortUrls, setShortUrls }) {
           count={url.count}
           shortUrls={shortUrls}
           setShortUrls={setShortUrls}
+          mutate={mutate}
         />
       ))}
     </UnorderedList>
