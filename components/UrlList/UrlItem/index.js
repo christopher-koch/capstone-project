@@ -15,10 +15,10 @@ export default function UrlItem({
 }) {
   const [editing, setEditing] = useState(false);
 
-  const handleDelete = (e) => {
-    console.log(e);
-    const filteredArray = shortUrls.filter((url) => url.id !== e.target.id);
-    setShortUrls(filteredArray);
+  const handleDelete = async (e) => {
+    await fetch(`/api/${e.target.id}`, {
+      method: "DELETE",
+    });
   };
 
   const handleEdit = () => {
@@ -77,7 +77,7 @@ export default function UrlItem({
           >
             <VscCopy className="icon" />
           </button>
-          <button id={id} onClick={(e) => handleDelete(e)}>
+          <button id={shortURL} onClick={(e) => handleDelete(e)}>
             <VscTrash className="icon" />
           </button>
           <button id={id} onClick={() => handleEdit()}>
