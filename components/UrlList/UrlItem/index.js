@@ -60,11 +60,11 @@ export default function UrlItem({
           <Span>{longURL}</Span>
           <Link
             id={id}
-            href={longURL}
+            href={shortURL}
             target="_blank"
             onClick={(e) => handleLinkClick(e)}
           >
-            {`${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`}
+            {shortURL}
           </Link>
         </section>
         <section>

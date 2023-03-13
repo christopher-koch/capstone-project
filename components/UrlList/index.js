@@ -12,7 +12,7 @@ export default function UrlList({ shortUrls, setShortUrls }) {
     <UnorderedList>
       {mongoData.map((url) => (
         <UrlItem
-          key={url.id}
+          key={url.shortURL}
           longURL={url.longURL}
           shortURL={url.shortURL}
           id={url.id}
