@@ -17,7 +17,6 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    console.log(shortUrl);
     const urlToDelete = await Url.findOneAndDelete({ shortURL: shortUrl });
     response.status(200).json(urlToDelete);
   }
