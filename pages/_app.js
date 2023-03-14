@@ -38,8 +38,8 @@ export default function App({ Component, pageProps }) {
             isLoading={isLoading}
             mutate={mutate}
           />
-          <Navi />
         </main>
+        <Navi />
       </SWRConfig>
     </>
   );

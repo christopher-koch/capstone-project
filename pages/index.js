@@ -59,9 +59,11 @@ export default function Home({
   }
 
   return (
-    <section>
+    <main className="main-container">
       <StyledSubHeading>The Amazing</StyledSubHeading>
-      <h1>URL Shortener</h1>
+      <h1>
+        <span>URL Shortener</span>
+      </h1>
       <p>
         Enter a long Url and press the Button to shorten it! You can see all
         shortened Links on the{" "}
@@ -79,7 +81,7 @@ export default function Home({
           required
           placeholder="https://paste-long-url.com"
         />
-        <button className="cool-button">Shorten URL</button>
+        <button className="cool-button">Short it!</button>
       </StyledForm>
       {successForm === true ? (
         <StyledImage
@@ -100,7 +102,7 @@ export default function Home({
           setShortUrls={setShortUrls}
         />
       )}
-    </section>
+    </main>
   );
 }
 
@@ -117,13 +119,18 @@ const StyledForm = styled.form`
     border: none;
     padding: 0.6rem 1rem;
     flex: 2;
+    font-weight: 300;
+    font-variant: small-caps;
+    letter-spacing: 0.1rem;
+    &:focus-visible {
+      outline: none;
+    }
   }
   > button {
-    background-color: var(--lavender);
+    background-color: var(--primary-highlight);
     color: var(--crust);
     font-weight: 200;
     font-stretch: 75%;
-    font-variation-settings: "ital" 10, "wdth" 125;
     padding: 0 1rem;
   }
 `;
@@ -135,10 +142,9 @@ const StyledImage = styled(Image)`
 `;
 
 const StyledSubHeading = styled.span`
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 400;
   font-stretch: 75%;
-  font-variation-settings: "ital" 10, "wdth" 125;
+  font-variant: small-caps;
   letter-spacing: 0.4rem;
 `;

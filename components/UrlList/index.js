@@ -9,7 +9,7 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   if (isLoading) return <div>loading data from db...</div>;
 
   return (
-    <UnorderedList>
+    <ItemContainer>
       {mongoData.map((url) => (
         <UrlItem
           key={url.shortURL}
@@ -22,13 +22,11 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
           mutate={mutate}
         />
       ))}
-    </UnorderedList>
+    </ItemContainer>
   );
 }
 
-const UnorderedList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  gap: 1.4rem;
+const ItemContainer = styled.section`
+  display: grid;
+  gap: 3rem;
 `;
