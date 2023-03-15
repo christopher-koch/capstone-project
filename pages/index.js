@@ -95,6 +95,7 @@ export default function Home({
           count={lastItem.count}
           shortUrls={shortUrls}
           setShortUrls={setShortUrls}
+          setSuccessForm={setSuccessForm}
         />
       )}
     </main>

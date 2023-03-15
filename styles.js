@@ -101,7 +101,6 @@ export default createGlobalStyle`
   }
   
   .icon{
-    font-size: 1.8rem;
     pointer-events: none;
   }
 

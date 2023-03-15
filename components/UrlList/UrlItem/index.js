@@ -14,13 +14,14 @@ export default function UrlItem({
   count,
   shortUrls,
   setShortUrls,
+  setSuccessForm,
   mutate,
 }) {
   const [editing, setEditing] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleDelete = async (e) => {
-    console.log(e.target.id);
+    setSuccessForm(false);
     await fetch(`/api/${e.target.id}`, {
       method: "DELETE",
     });
@@ -100,7 +101,7 @@ export default function UrlItem({
         <StyledOptions>
           <div className="delete-container">
             <StyledDelete id={shortURL} onClick={(e) => handleDelete(e)}>
-              <VscTrash />
+              <VscTrash className="icon" />
             </StyledDelete>
           </div>
           {editing === false ? null : (
