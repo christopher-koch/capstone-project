@@ -19,6 +19,8 @@ export default createGlobalStyle`
   --blue: #006dca;
   --lightgreen: #e5ffc3;
   --green: #5c9b00;
+  --lightorange: #FFDFC6;
+  --orange: #D57300;
 }
 
 @font-face {
@@ -107,8 +109,8 @@ export default createGlobalStyle`
     pointer-events: none;
   }
 
-.count-container {
-  margin-left: auto;
+.delete-container {
+  margin-right: auto;
 }
 
 `;

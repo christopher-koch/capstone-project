@@ -4,6 +4,7 @@ import { useState } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { VscEdit } from "react-icons/vsc";
 import { VscCopy } from "react-icons/vsc";
+import { VscError } from "react-icons/vsc";
 
 export default function UrlItem({
   id,
@@ -87,23 +88,33 @@ export default function UrlItem({
           </StyledCopyButton>
         </StyledShortUrl>
         <StyledOptions>
-          <StyledDelete id={shortURL} onClick={(e) => handleDelete(e)}>
-            <VscTrash />
-          </StyledDelete>
-          {editing === false ? null : (
-            <Input
-              id={shortURL}
-              placeholder={shortURL}
-              type="text"
-              onKeyDown={(e) => handleEditDone(e, id)}
-            />
-          )}
-          <StyledEdit id={shortURL} onClick={() => handleEdit()}>
-            <VscEdit />
-          </StyledEdit>
-          <div className="count-container">
-            📈<StyledCounter>{count}</StyledCounter>
+          <div className="delete-container">
+            <StyledDelete id={shortURL} onClick={(e) => handleDelete(e)}>
+              <VscTrash />
+            </StyledDelete>
           </div>
+          {editing === false ? null : (
+            <StyledEditContainer>
+              <span>Press ⏎ to save</span>
+              <StyledEditInput
+                id={shortURL}
+                placeholder={shortURL}
+                type="text"
+                onKeyDown={(e) => handleEditDone(e, id)}
+              />
+            </StyledEditContainer>
+          )}
+          {editing === true ? (
+            <StyledEditReset id={shortURL} onClick={() => handleEdit()}>
+              <VscError />
+            </StyledEditReset>
+          ) : (
+            <StyledEdit id={shortURL} onClick={() => handleEdit()}>
+              <VscEdit />
+            </StyledEdit>
+          )}
+
+          <StyledCounter>{count}</StyledCounter>
         </StyledOptions>
       </ListItem>
     </>
@@ -159,7 +170,7 @@ const StyledShortUrl = styled.span`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   padding-left: 0.8rem;
   font-size: 0.7rem;
   font-weight: 600;
@@ -183,6 +194,7 @@ const StyledOptions = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: flex-end;
 `;
 
 const StyledDelete = styled.button`
@@ -193,10 +205,30 @@ const StyledDelete = styled.button`
   padding: 0.4rem 0.6rem;
 `;
 
+const StyledEditContainer = styled.div`
+  display: column;
+  margin-top: -15px;
+  text-align: end;
+  > span {
+    font-size: 10px;
+    font-style: italic;
+    color: var(--base);
+    margin-right: 1.4rem;
+  }
+`;
+
 const StyledEdit = styled.button`
   font-size: 1.2rem;
   background-color: var(--lightblue);
   color: var(--blue);
+  border-radius: 2px;
+  padding: 0.4rem 0.6rem;
+`;
+
+const StyledEditReset = styled.button`
+  font-size: 1.2rem;
+  background-color: var(--lightorange);
+  color: var(--orange);
   border-radius: 2px;
   padding: 0.4rem 0.6rem;
 `;
@@ -208,10 +240,17 @@ const StyledCounter = styled.span`
   border-radius: 5rem;
   padding: 0.4rem 0.8rem;
   text-align: center;
+  flex-shrink: 0;
 `;
 
-const Input = styled.input`
+const StyledEditInput = styled.input`
+  background-color: var(--lightgray);
+  color: var(--text);
+  border: 2px solid var(--text);
+  border-radius: 2px;
+  padding: 0.4rem 0.6rem;
   width: 100px;
-  border: 1px solid #dfdfdf;
-  outline: none;
+  &:focus-visible {
+    outline: none;
+  }
 `;
