@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import SuccessKid from "assets/img/success-kid.gif";
 import Image from "next/image";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ export default function Popup({ setShowPopup }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(false);
-    }, 3000);
+    }, 2300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,8 +39,27 @@ const StyledPopupContainer = styled.div`
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+      rgba(255, 0, 0, 0.5) 0%,
+      rgba(255, 154, 0, 0.5) 10%,
+      rgba(208, 222, 33, 0.5) 20%,
+      rgba(79, 220, 74, 0.5) 30%,
+      rgba(63, 218, 216, 0.5) 40%,
+      rgba(47, 201, 226, 0.5) 50%,
+      rgba(28, 127, 238, 0.5) 60%,
+      rgba(95, 21, 242, 0.5) 70%,
+      rgba(186, 12, 248, 0.5) 80%,
+      rgba(251, 7, 217, 0.5) 90%,
+      rgba(255, 0, 0, 0.5) 100%
+    )
+    0 0/100% 200%;
+  animation: a 2s linear infinite;
   z-index: 999;
+  @keyframes a {
+    to {
+      background-position: 0 -200%;
+    }
+  }
 `;
 
 const StyledImage = styled(Image)`

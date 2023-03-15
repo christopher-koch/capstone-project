@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { VscEdit } from "react-icons/vsc";
 import { VscCopy } from "react-icons/vsc";
 import { VscError } from "react-icons/vsc";
+import SuccessInfo from "@/components/SuccessInfo";
 
 export default function UrlItem({
   id,
@@ -16,6 +17,7 @@ export default function UrlItem({
   mutate,
 }) {
   const [editing, setEditing] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleDelete = async (e) => {
     console.log(e.target.id);
@@ -52,6 +54,19 @@ export default function UrlItem({
     }
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`
+    );
+    setCopySuccess(true);
+  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCopySuccess(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [copySuccess]);
+
   const handleLinkClick = (e) => {
     setShortUrls(
       shortUrls.map((url) => {
@@ -62,7 +77,6 @@ export default function UrlItem({
         }
       })
     );
-    console.log(shortUrls);
   };
 
   return (
@@ -71,6 +85,7 @@ export default function UrlItem({
         <StyledLongLabel>Long Url</StyledLongLabel>
         <StyledLongUrl>{longURL}</StyledLongUrl>
         <StyledShortLabel>Short Url</StyledShortLabel>
+        {copySuccess === true ? <SuccessInfo /> : null}
         <StyledShortUrl
           id={id}
           href={shortURL}
@@ -78,13 +93,7 @@ export default function UrlItem({
           onClick={(e) => handleLinkClick(e)}
         >
           {process.env.NEXT_PUBLIC_VERCEL_URL}/{shortURL}
-          <StyledCopyButton
-            onClick={() =>
-              navigator.clipboard.writeText(
-                `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`
-              )
-            }
-          >
+          <StyledCopyButton onClick={handleCopy}>
             <VscCopy />
           </StyledCopyButton>
         </StyledShortUrl>
@@ -123,6 +132,7 @@ export default function UrlItem({
 }
 
 const ListItem = styled.div`
+  position: relativ;
   background-color: var(--white);
   border: 2px solid var(--text);
   filter: drop-shadow(4px 6px 0 var(--text));

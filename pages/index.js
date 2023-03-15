@@ -23,18 +23,15 @@ export default function Home({
   if (isLoading) return <div>loading data from db...</div>;
   const lastItem = mongoData.at(-1);
 
-  function handlePopup() {
-    setShowPopup(true);
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
+    setShowPopup(true);
     const formData = new FormData(event.target);
     const urlData = Object.fromEntries(formData);
     const { input } = urlData;
     const shortURL = generateID();
     const newUrl = new URL(input);
-    // Extend later with ID and other stuff - or at another point?
+
     setShortUrls([
       ...shortUrls,
       { longURL: input, shortURL: shortURL, id: shortURL, count: 0 },
@@ -65,6 +62,7 @@ export default function Home({
 
   return (
     <main className="main-container">
+      {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}
       <StyledSubHeading>The Amazing</StyledSubHeading>
       <h1>
         <span>URL Shortener</span>
@@ -78,8 +76,6 @@ export default function Home({
           </Link>
         }
       </p>
-      <button onClick={handlePopup}>Show Popup</button>
-      {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}
       <StyledForm onSubmit={handleSubmit} aria-label="URL Shortener Form">
         <input
           name="input"

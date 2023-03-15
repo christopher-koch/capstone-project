@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export default function Banner({ direction }) {
-  console.log(direction);
   return (
     <StyledContainer>
       <StyledText className={direction}>
