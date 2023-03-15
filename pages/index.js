@@ -3,9 +3,8 @@ import UrlItem from "@/components/UrlList/UrlItem";
 import Link from "next/link";
 import useSWR from "swr";
 import generateID from "@/utils/generateID";
-import SuccessKid from "../assets/img/success-kid.gif";
-import Image from "next/image";
 import styled from "styled-components";
+import Popup from "@/components/Popup";
 
 export default function Home({
   shortUrls,
@@ -16,11 +15,17 @@ export default function Home({
 }) {
   const [successForm, setSuccessForm] = useState(false);
   const { mutate } = useSWR(`/api/urls`);
+  const [showPopup, setShowPopup] = useState(false);
+
   //const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading data from db...</div>;
   const lastItem = mongoData.at(-1);
+
+  function handlePopup() {
+    setShowPopup(true);
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -73,6 +78,8 @@ export default function Home({
           </Link>
         }
       </p>
+      <button onClick={handlePopup}>Show Popup</button>
+      {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}
       <StyledForm onSubmit={handleSubmit} aria-label="URL Shortener Form">
         <input
           name="input"
@@ -83,14 +90,6 @@ export default function Home({
         />
         <button className="cool-button">Short it!</button>
       </StyledForm>
-      {successForm === true ? (
-        <StyledImage
-          alt="success kid gif"
-          src={SuccessKid}
-          width={160}
-          height={120}
-        />
-      ) : null}
       {successForm === false ? null : (
         <UrlItem
           key={lastItem.id}
@@ -133,12 +132,6 @@ const StyledForm = styled.form`
     font-stretch: 75%;
     padding: 0 1rem;
   }
-`;
-
-const StyledImage = styled(Image)`
-  filter: drop-shadow(4px 6px 0 var(--text));
-  border-radius: 2px;
-  margin-bottom: 1.4rem;
 `;
 
 const StyledSubHeading = styled.span`

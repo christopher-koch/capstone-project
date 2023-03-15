@@ -18,6 +18,7 @@ export default function UrlItem({
   const [editing, setEditing] = useState(false);
 
   const handleDelete = async (e) => {
+    console.log(e.target.id);
     await fetch(`/api/${e.target.id}`, {
       method: "DELETE",
     });

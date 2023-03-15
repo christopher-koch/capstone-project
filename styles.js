@@ -21,6 +21,8 @@ export default createGlobalStyle`
   --green: #5c9b00;
   --lightorange: #FFDFC6;
   --orange: #D57300;
+  --lightyellow: #FFF9E5;
+  --yellow: #FFE53E;
 }
 
 @font-face {
@@ -112,5 +114,36 @@ export default createGlobalStyle`
 .delete-container {
   margin-right: auto;
 }
+
+.normal {
+  -moz-animation: marqueeForward 10s linear infinite;
+  -webkit-animation: marqueeForward 10s linear infinite;
+  animation: marqueeForward 2s linear infinite;
+@keyframes marqueeForward {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+.reversed {
+  -moz-animation: marqueeBackward 10s linear infinite;
+  -webkit-animation: marqueeBackward 10s linear infinite;
+  animation: marqueeBackward 2s linear infinite;
+@keyframes marqueeBackward {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+}
+
+
+
 
 `;
