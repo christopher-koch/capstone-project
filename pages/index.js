@@ -5,6 +5,8 @@ import useSWR from "swr";
 import generateID from "@/utils/generateID";
 import styled from "styled-components";
 import Popup from "@/components/Popup";
+import Image from "next/image";
+import LoadingImage from "assets/img/loading-screen.gif";
 
 export default function Home({
   shortUrls,
@@ -18,9 +20,19 @@ export default function Home({
   const [showPopup, setShowPopup] = useState(false);
 
   //const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
-
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading data from db...</div>;
+  if (isLoading)
+    return (
+      <StyledLoadingContainer>
+        <StyledImage
+          alt="Loading gif meme"
+          src={LoadingImage}
+          width={240}
+          height={240}
+        />
+        <p>Wait a second...</p>
+      </StyledLoadingContainer>
+    );
   const lastItem = mongoData.at(-1);
 
   async function handleSubmit(event) {
@@ -140,4 +152,18 @@ const StyledSubHeading = styled.span`
   letter-spacing: 0.4rem;
   padding: 0 0.2rem;
   text-shadow: 1px 1px 0 var(--text);
+`;
+
+const StyledLoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+const StyledImage = styled(Image)`
+  filter: drop-shadow(4px 6px 0 var(--text));
+  border-radius: 2px;
+  margin-bottom: 1.4rem;
 `;
