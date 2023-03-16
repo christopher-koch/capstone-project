@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Popup from "@/components/Popup";
 import Image from "next/image";
 import LoadingImage from "assets/img/loading-screen.gif";
+import ErrorImage from "assets/img/error.gif";
 
 export default function Home({
   shortUrls,
@@ -20,7 +21,18 @@ export default function Home({
   const [showPopup, setShowPopup] = useState(false);
 
   //const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
-  if (error) return <div>failed to load</div>;
+  if (error)
+    return (
+      <StyledLoadingContainer>
+        <StyledImage
+          alt="Error gif meme"
+          src={ErrorImage}
+          width={250}
+          height={188}
+        />
+        <p>Houston, we got a problem...</p>
+      </StyledLoadingContainer>
+    );
   if (isLoading)
     return (
       <StyledLoadingContainer>
