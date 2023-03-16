@@ -20,9 +20,12 @@ export default function Dashboard({ shortUrls, setShortUrls, mutate }) {
 }
 
 const StyledSubHeading = styled.span`
+  color: var(--white);
   font-size: 1rem;
   font-weight: 400;
   font-stretch: 75%;
   font-variant: small-caps;
   letter-spacing: 0.4rem;
+  padding: 0 0.2rem;
+  text-shadow: 1px 1px 0 var(--text);
 `;

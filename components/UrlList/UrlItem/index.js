@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { VscEdit } from "react-icons/vsc";
@@ -23,7 +22,6 @@ export default function UrlItem({
   const router = useRouter();
   const pathname = router.pathname;
 
-  console.log(pathname);
   const handleDelete = async (e) => {
     if (pathname === "/") {
       setSuccessForm(false);
@@ -47,7 +45,7 @@ export default function UrlItem({
           "Content-Type": "application/json",
         },
       });
-      mutate();
+      //mutate();
       //Brauch ich später noch?
       /* setShortUrls(
         shortUrls.map((url) => {

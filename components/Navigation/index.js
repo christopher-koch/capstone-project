@@ -10,16 +10,27 @@ export default function Navi() {
   return (
     <Nav>
       <List>
-        <StyledLink href="/" className={currentRoute === "/" ? "active" : ""}>
-          <CiHome className={currentRoute === "/" ? "icon-active" : "icon"} />
+        <StyledLink
+          href="/"
+          className={currentRoute === "/" ? "active" : "inactive"}
+        >
+          <CiHome
+            className={
+              currentRoute === "/" ? "icon-nav-active icon-nav" : "icon-nav"
+            }
+          />
         </StyledLink>
 
         <StyledLink
           href="/dashboard"
-          className={currentRoute === "/dashboard" ? "active" : ""}
+          className={currentRoute === "/dashboard" ? "active" : "inactive"}
         >
           <CiBoxList
-            className={currentRoute === "/dashboard" ? "icon-active" : "icon"}
+            className={
+              currentRoute === "/dashboard"
+                ? "icon-nav-active icon-nav"
+                : "icon-nav"
+            }
           />
         </StyledLink>
       </List>
@@ -28,24 +39,31 @@ export default function Navi() {
 }
 
 const Nav = styled.nav`
-  background-color: var(--base);
+  background-color: var(--white);
   position: fixed;
-  bottom: 0;
-  min-width: 100%;
-  z-index: 100;
+  top: 1rem;
+  min-width: 90%;
+  z-index: 5;
+  border-radius: 5px;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--text);
+  filter: drop-shadow(4px 6px 0 var(--text));
 `;
 
 const List = styled.ul`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
-  font-size: 2rem;
   list-style: none;
-  border: 2px solid var(--text);
 `;
 
 const StyledLink = styled(Link)`
-  text-align: center;
-  width: 100%;
-  padding: 1.4rem 0;
+  height: 1.6rem;
+  width: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 `;

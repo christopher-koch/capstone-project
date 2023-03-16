@@ -47,7 +47,7 @@ export default createGlobalStyle`
     padding: 0;
     font-family: 'Mona Sans';
     background-color: var(--base);
-    color: var(--base-dark)
+    color: var(--base-light)
   }
 
   button {
@@ -57,11 +57,12 @@ export default createGlobalStyle`
   }
   
   a {
-    color: var(--secondary-highlight)
+    color: var(--secondary-highlight);
+    text-decoration: none;
   }
   
   h1 {
-    color: var(--text);
+    color: var(--white);
     font-size: 2.2rem;
     font-weight: 800;
     letter-spacing: 0.1rem;
@@ -69,13 +70,8 @@ export default createGlobalStyle`
     font-variation-settings: "ital" 5, "wdth" 125;
     font-variant: small-caps;
     padding-bottom: 2rem;
-    > span {
-      display: inline-block;
-      padding: 0 0.2rem;
-      background-color: var(--primary-highlight);
-      transform:skew(-4deg)
+    text-shadow: 1px 2px 0 var(--text)
     }
-  }
   
   p {
     font-size: 1rem;
@@ -87,7 +83,7 @@ export default createGlobalStyle`
     flex-direction: column;
     overflow: hidden;
     max-width: 375px;
-    padding: 20% 5%;
+    padding: 25% 5%;
   }
 
   .link {
@@ -99,14 +95,18 @@ export default createGlobalStyle`
   .active {
     background: var(--base-light);
   }
-  
-  .icon{
+   
+  .inactive {
+    background: var(--lightgray);
+  }
+  .icon-nav{
+    font-size: 1.2rem;
+    color: var(--gray);
     pointer-events: none;
   }
 
-  .icon-active{
+  .icon-nav-active{
     color: var(--base);
-    font-size: 1.8rem;
     pointer-events: none;
   }
 

@@ -84,7 +84,7 @@ export default function Home({
           required
           placeholder="https://paste-long-url.com"
         />
-        <button className="cool-button">Short it!</button>
+        <button>Short it!</button>
       </StyledForm>
       {successForm === false ? null : (
         <UrlItem
@@ -124,17 +124,20 @@ const StyledForm = styled.form`
   }
   > button {
     background-color: var(--primary-highlight);
-    color: var(--crust);
-    font-weight: 200;
+    font-weight: 700;
+    color: var(--text);
     font-stretch: 75%;
     padding: 0 1rem;
   }
 `;
 
 const StyledSubHeading = styled.span`
+  color: var(--white);
   font-size: 1rem;
   font-weight: 400;
   font-stretch: 75%;
   font-variant: small-caps;
   letter-spacing: 0.4rem;
+  padding: 0 0.2rem;
+  text-shadow: 1px 1px 0 var(--text);
 `;
