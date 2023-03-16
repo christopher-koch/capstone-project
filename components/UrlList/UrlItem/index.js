@@ -6,6 +6,7 @@ import { VscEdit } from "react-icons/vsc";
 import { VscCopy } from "react-icons/vsc";
 import { VscError } from "react-icons/vsc";
 import SuccessInfo from "@/components/SuccessInfo";
+import { useRouter } from "next/router";
 
 export default function UrlItem({
   id,
@@ -19,9 +20,14 @@ export default function UrlItem({
 }) {
   const [editing, setEditing] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const router = useRouter();
+  const pathname = router.pathname;
 
+  console.log(pathname);
   const handleDelete = async (e) => {
-    setSuccessForm(false);
+    if (pathname === "/") {
+      setSuccessForm(false);
+    }
     await fetch(`/api/${e.target.id}`, {
       method: "DELETE",
     });
