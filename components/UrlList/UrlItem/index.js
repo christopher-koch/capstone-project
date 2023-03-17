@@ -203,6 +203,7 @@ const StyledCopyButton = styled.button`
   font-size: 1.2rem;
   color: var(--text);
   padding: 0.4rem 0.7rem;
+  height: 100%;
 `;
 
 const StyledOptions = styled.div`
