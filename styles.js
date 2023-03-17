@@ -58,12 +58,13 @@ export default createGlobalStyle`
   
   a {
     color: var(--secondary-highlight);
-    text-decoration: none;
+    text-decoration: underline;
+    font-weight: 600;
   }
   
   h1 {
     color: var(--white);
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: 0.1rem;
     font-stretch: 75%;
@@ -76,6 +77,7 @@ export default createGlobalStyle`
   p {
     font-size: 1rem;
     font-weight: 400;
+    line-height: 1.4;
   }
   
   .main-container {
@@ -120,8 +122,8 @@ export default createGlobalStyle`
 }
 
 .normal {
-  -moz-animation: marqueeForward 10s linear infinite;
-  -webkit-animation: marqueeForward 10s linear infinite;
+  -moz-animation: marqueeForward 2s linear infinite;
+  -webkit-animation: marqueeForward 2s linear infinite;
   animation: marqueeForward 2s linear infinite;
 @keyframes marqueeForward {
     0% {
@@ -134,8 +136,8 @@ export default createGlobalStyle`
 }
 
 .reversed {
-  -moz-animation: marqueeBackward 10s linear infinite;
-  -webkit-animation: marqueeBackward 10s linear infinite;
+  -moz-animation: marqueeBackward 2s linear infinite;
+  -webkit-animation: marqueeBackward 2s linear infinite;
   animation: marqueeBackward 2s linear infinite;
 @keyframes marqueeBackward {
     0% {

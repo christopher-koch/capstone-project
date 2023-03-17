@@ -149,10 +149,10 @@ const ListItem = styled.div`
 `;
 
 const StyledLongUrl = styled.span`
-  font-size: 0.7rem;
-  font-weight: 350;
+  font-size: 0.9rem;
+  font-weight: 500;
   font-variant: small-caps;
-  letter-spacing: 0.15rem;
+  letter-spacing: 0.1rem;
   color: var(--gray);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -162,8 +162,7 @@ const StyledLongUrl = styled.span`
 
 const StyledLongLabel = styled.div`
   color: var(--text);
-  font-size: 0.8rem;
-  font-variant: small-caps;
+  font-size: 0.9rem;
   font-weight: 700;
   padding-bottom: 0.4rem;
   &::after {
@@ -173,9 +172,9 @@ const StyledLongLabel = styled.div`
 
 const StyledShortLabel = styled.div`
   color: var(--text);
-  font-size: 0.8rem;
-  font-variant: small-caps;
+  font-size: 0.9rem;
   font-weight: 700;
+  padding-bottom: 0.4rem;
   padding-bottom: 0.4rem;
   &::after {
     content: " 🤩";
@@ -188,7 +187,7 @@ const StyledShortUrl = styled.span`
   align-items: center;
   margin-bottom: 4rem;
   padding-left: 0.8rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1rem;
   background-color: var(--lightgray);

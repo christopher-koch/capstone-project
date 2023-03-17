@@ -157,7 +157,7 @@ const StyledForm = styled.form`
 
 const StyledSubHeading = styled.span`
   color: var(--white);
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 400;
   font-stretch: 75%;
   font-variant: small-caps;
