@@ -10,18 +10,21 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
 
   return (
     <ItemContainer>
-      {mongoData.map((url) => (
-        <UrlItem
-          key={url.shortURL}
-          longURL={url.longURL}
-          shortURL={url.shortURL}
-          id={url.id}
-          count={url.count}
-          shortUrls={shortUrls}
-          setShortUrls={setShortUrls}
-          mutate={mutate}
-        />
-      ))}
+      {mongoData
+        .slice(0)
+        .reverse()
+        .map((url) => (
+          <UrlItem
+            key={url.shortURL}
+            longURL={url.longURL}
+            shortURL={url.shortURL}
+            id={url.id}
+            count={url.count}
+            shortUrls={shortUrls}
+            setShortUrls={setShortUrls}
+            mutate={mutate}
+          />
+        ))}
     </ItemContainer>
   );
 }

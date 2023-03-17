@@ -99,6 +99,11 @@ export default createGlobalStyle`
   .inactive {
     background: var(--lightgray);
   }
+
+  .icon {
+    pointer-events: none;
+  }
+
   .icon-nav{
     font-size: 1.2rem;
     color: var(--gray);
