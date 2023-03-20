@@ -20,7 +20,6 @@ export default function Home({
   const { mutate } = useSWR(`/api/urls`);
   const [showPopup, setShowPopup] = useState(false);
 
-  //const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
   if (error)
     return (
       <StyledLoadingContainer>

@@ -39,7 +39,6 @@ const StyledPopupContainer = styled.div`
   right: 0;
   bottom: 0;
   margin: auto;
-  //i don't understand completely this rainbow effect. Is it okay to let this in?
   background: linear-gradient(
       rgba(255, 0, 0, 0.5) 0%,
       rgba(255, 154, 0, 0.5) 10%,

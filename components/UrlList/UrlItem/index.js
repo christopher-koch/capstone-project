@@ -45,8 +45,6 @@ export default function UrlItem({
           "Content-Type": "application/json",
         },
       });
-      //mutate();
-      //Brauch ich später noch?
       /* setShortUrls(
         shortUrls.map((url) => {
           if (url.id === id) {
