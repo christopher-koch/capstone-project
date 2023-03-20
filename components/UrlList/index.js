@@ -9,26 +9,27 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   if (isLoading) return <div>loading data from db...</div>;
 
   return (
-    <UnorderedList>
-      {mongoData.map((url) => (
-        <UrlItem
-          key={url.shortURL}
-          longURL={url.longURL}
-          shortURL={url.shortURL}
-          id={url.id}
-          count={url.count}
-          shortUrls={shortUrls}
-          setShortUrls={setShortUrls}
-          mutate={mutate}
-        />
-      ))}
-    </UnorderedList>
+    <ItemContainer>
+      {mongoData
+        .slice(0)
+        .reverse()
+        .map((url) => (
+          <UrlItem
+            key={url.shortURL}
+            longURL={url.longURL}
+            shortURL={url.shortURL}
+            id={url.id}
+            count={url.count}
+            shortUrls={shortUrls}
+            setShortUrls={setShortUrls}
+            mutate={mutate}
+          />
+        ))}
+    </ItemContainer>
   );
 }
 
-const UnorderedList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  gap: 1.4rem;
+const ItemContainer = styled.section`
+  display: grid;
+  gap: 3rem;
 `;

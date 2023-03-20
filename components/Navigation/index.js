@@ -10,46 +10,63 @@ export default function Navi() {
   return (
     <Nav>
       <List>
-        <StyledLink href="/" className={currentRoute === "/" ? "active" : ""}>
-          <CiHome />
-        </StyledLink>
-
-        <StyledLink
-          href="/dashboard"
-          className={currentRoute === "/dashboard" ? "active" : ""}
-        >
-          <CiBoxList />
-        </StyledLink>
+        <li>
+          <StyledLink
+            href="/"
+            className={currentRoute === "/" ? "active" : "inactive"}
+          >
+            <CiHome
+              className={
+                currentRoute === "/" ? "icon-nav-active icon-nav" : "icon-nav"
+              }
+            />
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink
+            href="/dashboard"
+            className={currentRoute === "/dashboard" ? "active" : "inactive"}
+          >
+            <CiBoxList
+              className={
+                currentRoute === "/dashboard"
+                  ? "icon-nav-active icon-nav"
+                  : "icon-nav"
+              }
+            />
+          </StyledLink>
+        </li>
       </List>
     </Nav>
   );
 }
 
 const Nav = styled.nav`
-  background-color: #fff;
+  background-color: var(--white);
   position: fixed;
-  bottom: 0;
-  min-width: 100%;
-  z-index: 100;
+  top: 1rem;
+  min-width: 90%;
+  z-index: 5;
+  border-radius: 5px;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--text);
+  filter: drop-shadow(4px 6px 0 var(--text));
 `;
 
 const List = styled.ul`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
-  border: 1px dotted #000;
-  font-size: 2rem;
   list-style: none;
-  > * {
-    border-right: 1px dotted #000;
-  }
-  > *:last-child {
-    border: none;
-  }
 `;
 
 const StyledLink = styled(Link)`
-  text-align: center;
-  width: 100%;
-  padding: 2rem 0;
+  height: 1.6rem;
+  width: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 `;
