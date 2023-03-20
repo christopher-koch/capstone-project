@@ -10,29 +10,32 @@ export default function Navi() {
   return (
     <Nav>
       <List>
-        <StyledLink
-          href="/"
-          className={currentRoute === "/" ? "active" : "inactive"}
-        >
-          <CiHome
-            className={
-              currentRoute === "/" ? "icon-nav-active icon-nav" : "icon-nav"
-            }
-          />
-        </StyledLink>
-
-        <StyledLink
-          href="/dashboard"
-          className={currentRoute === "/dashboard" ? "active" : "inactive"}
-        >
-          <CiBoxList
-            className={
-              currentRoute === "/dashboard"
-                ? "icon-nav-active icon-nav"
-                : "icon-nav"
-            }
-          />
-        </StyledLink>
+        <li>
+          <StyledLink
+            href="/"
+            className={currentRoute === "/" ? "active" : "inactive"}
+          >
+            <CiHome
+              className={
+                currentRoute === "/" ? "icon-nav-active icon-nav" : "icon-nav"
+              }
+            />
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink
+            href="/dashboard"
+            className={currentRoute === "/dashboard" ? "active" : "inactive"}
+          >
+            <CiBoxList
+              className={
+                currentRoute === "/dashboard"
+                  ? "icon-nav-active icon-nav"
+                  : "icon-nav"
+              }
+            />
+          </StyledLink>
+        </li>
       </List>
     </Nav>
   );
