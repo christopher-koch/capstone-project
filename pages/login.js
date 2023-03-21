@@ -1,6 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 
-export default function LoginTest() {
+export default function Login() {
   const { data: session } = useSession();
   console.log(session);
 

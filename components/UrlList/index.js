@@ -2,6 +2,7 @@ import styled from "styled-components";
 import UrlItem from "./UrlItem";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
@@ -9,27 +10,35 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading data from db...</div>;
-
-  return (
-    <ItemContainer>
-      {mongoData
-        .filter((entry) => entry.author === session.user.name)
-        .slice(0)
-        .reverse()
-        .map((url) => (
-          <UrlItem
-            key={url.shortURL}
-            longURL={url.longURL}
-            shortURL={url.shortURL}
-            id={url.id}
-            count={url.count}
-            shortUrls={shortUrls}
-            setShortUrls={setShortUrls}
-            mutate={mutate}
-          />
-        ))}
-    </ItemContainer>
-  );
+  if (session) {
+    return (
+      <ItemContainer>
+        {mongoData
+          .filter((entry) => entry.author === session.user.name)
+          .slice(0)
+          .reverse()
+          .map((url) => (
+            <UrlItem
+              key={url.shortURL}
+              longURL={url.longURL}
+              shortURL={url.shortURL}
+              id={url.id}
+              count={url.count}
+              shortUrls={shortUrls}
+              setShortUrls={setShortUrls}
+              mutate={mutate}
+            />
+          ))}
+      </ItemContainer>
+    );
+  } else {
+    return (
+      <div>
+        To view shortened URLs, first <Link href="/login">sign in</Link>, then
+        shorten URLs.{" "}
+      </div>
+    );
+  }
 }
 
 const ItemContainer = styled.section`
