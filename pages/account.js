@@ -1,13 +1,34 @@
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, signIn } from "next-auth/react";
 import Image from "next/image";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
 export default function Account() {
-  const { data: session } = useSession({ required: true });
+  const { data: session } = useSession();
+  console.log(session);
   const router = useRouter();
 
+  async function addUserToDatabase() {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({
+        name: session.user.name,
+        email: session.user.email,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Status ", data.status);
+      //mutate();
+    } else {
+      console.log("User already exists!");
+      console.error("Error", response.status);
+    }
+  }
   if (session) {
+    addUserToDatabase();
     return (
       <StyledContainer>
         Welcome {session.user.name} <br />{" "}
@@ -26,7 +47,12 @@ export default function Account() {
       </StyledContainer>
     );
   } else {
-    return <div> Not logged in.</div>;
+    return (
+      <StyledContainer>
+        <p>Sign in to access this page</p>
+        <StyledButton onClick={() => signIn()}>Sign In</StyledButton>
+      </StyledContainer>
+    );
   }
 }
 

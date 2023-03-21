@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import UrlItem from "./UrlItem";
 import useSWR from "swr";
-import { useSession } from "next-auth/react";
+import { useSession, sign } from "next-auth/react";
 import Link from "next/link";
 
 export default function UrlList({ shortUrls, setShortUrls, mutate }) {
@@ -34,7 +34,7 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   } else {
     return (
       <div>
-        To view shortened URLs, first <Link href="/login">sign in</Link>, then
+        To view shortened URLs, first <Link href="/account">sign in</Link>, then
         shorten URLs.{" "}
       </div>
     );

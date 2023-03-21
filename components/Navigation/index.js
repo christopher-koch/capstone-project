@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { CiHome } from "react-icons/ci";
 import { CiBoxList } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
 import { useRouter } from "next/router";
 
 export default function Navi() {
@@ -18,6 +19,20 @@ export default function Navi() {
             <CiHome
               className={
                 currentRoute === "/" ? "icon-nav-active icon-nav" : "icon-nav"
+              }
+            />
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink
+            href="/account"
+            className={currentRoute === "/account" ? "active" : "inactive"}
+          >
+            <CiUser
+              className={
+                currentRoute === "/account"
+                  ? "icon-nav-active icon-nav"
+                  : "icon-nav"
               }
             />
           </StyledLink>
