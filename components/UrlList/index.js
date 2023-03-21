@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import UrlItem from "./UrlItem";
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
+  const { data: session } = useSession();
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading data from db...</div>;
@@ -11,6 +13,7 @@ export default function UrlList({ shortUrls, setShortUrls, mutate }) {
   return (
     <ItemContainer>
       {mongoData
+        .filter((entry) => entry.author === session.user.name)
         .slice(0)
         .reverse()
         .map((url) => (

@@ -8,6 +8,7 @@ import Popup from "@/components/Popup";
 import Image from "next/image";
 import LoadingImage from "assets/img/loading-screen.gif";
 import ErrorImage from "assets/img/error.gif";
+import { useSession } from "next-auth/react";
 
 export default function Home({
   shortUrls,
@@ -19,6 +20,7 @@ export default function Home({
   const [successForm, setSuccessForm] = useState(false);
   const { mutate } = useSWR(`/api/urls`);
   const [showPopup, setShowPopup] = useState(false);
+  const { data: session } = useSession();
 
   if (error)
     return (
@@ -59,8 +61,14 @@ export default function Home({
       ...shortUrls,
       { longURL: input, shortURL: shortURL, id: shortURL, count: 0 },
     ]);
-    const newUrlData = { longURL: input, shortURL: shortURL, count: 0 };
-    console.log(newUrlData);
+
+    const newUrlData = {
+      longURL: input,
+      shortURL: shortURL,
+      count: 0,
+      ...(session && { author: session.user.name }),
+    };
+
     const response = await fetch("/api/urls", {
       method: "POST",
       body: JSON.stringify(newUrlData),

@@ -4,6 +4,10 @@ import User from "@/data/models/Users";
 export default async function handler(request, response) {
   await dbConnect();
 
+  const checkIfUserExist = await User.findOne({ email: request.body.email });
+  if (checkIfUserExist)
+    return response.status(422).json({ message: "User already Exists" });
+
   if (request.method === "POST") {
     try {
       const userData = request.body;
