@@ -113,8 +113,8 @@ export default function Home({
         <StyledWarning>
           <CiWarning className="warning-icon" />
           <span>
-            Shortened URLs will be deleted after 1 week, if you're not logged
-            in! <Link href={"/account"}>Sign in here</Link>
+            Shortened URLs will be deleted after 1 week, if you&apos;re not
+            logged in! <Link href={"/account"}>Sign in here</Link>
           </span>
         </StyledWarning>
       ) : null}
