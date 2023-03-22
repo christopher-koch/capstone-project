@@ -200,8 +200,8 @@ const StyledImage = styled(Image)`
 
 const StyledWarning = styled.div`
   margin-top: 1rem;
-  background-color: var(--red);
-  color: var(--lightred);
+  background-color: var(--lightred);
+  color: var(--red);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -213,5 +213,8 @@ const StyledWarning = styled.div`
   > .warning-icon {
     font-size: 2.4rem;
     margin-right: 0.6rem;
+  }
+  > span a {
+    color: var(--red);
   }
 `;
