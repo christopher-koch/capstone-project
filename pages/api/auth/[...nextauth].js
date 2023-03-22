@@ -11,10 +11,5 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  callbacks: {
-    async redirect(url, baseUrl) {
-      return `${NEXT_PUBLIC_VERCEL_URL}`;
-    },
-  },
 };
 export default NextAuth(authOptions);
