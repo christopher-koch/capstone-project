@@ -25,15 +25,6 @@ export default createGlobalStyle`
   --yellow: #FFE53E;
 }
 
-/* @font-face {
-  font-family: 'Mona Sans';
-  src:
-    url('next/font/local/Mona-Sans.woff2') format('woff2 supports variations'),
-    url('next/font/local/Mona-Sans.woff2') format('woff2-variations');
-  font-weight: 200 900;
-  font-stretch: 75% 125%;
-} */
-
   *,
   *::before,
   *::after {
