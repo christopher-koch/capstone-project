@@ -9,6 +9,7 @@ import Image from "next/image";
 import LoadingImage from "assets/img/loading-screen.gif";
 import ErrorImage from "assets/img/error.gif";
 import { useSession } from "next-auth/react";
+import { CiWarning } from "react-icons/ci";
 
 export default function Home({
   shortUrls,
@@ -21,6 +22,7 @@ export default function Home({
   const { mutate } = useSWR(`/api/urls`);
   const [showPopup, setShowPopup] = useState(false);
   const { data: session } = useSession();
+  console.log(session);
 
   if (error)
     return (
@@ -107,6 +109,15 @@ export default function Home({
           </Link>
         }
       </p>
+      {!session ? (
+        <StyledWarning>
+          <CiWarning className="warning-icon" />
+          <span>
+            Shortened URLs will be deleted after 1 week, if you're not logged
+            in! <Link href={"/account"}>Sign in here</Link>
+          </span>
+        </StyledWarning>
+      ) : null}
       <StyledForm onSubmit={handleSubmit} aria-label="URL Shortener Form">
         <input
           name="input"
@@ -185,4 +196,22 @@ const StyledImage = styled(Image)`
   filter: drop-shadow(4px 6px 0 var(--text));
   border-radius: 2px;
   margin-bottom: 1.4rem;
+`;
+
+const StyledWarning = styled.div`
+  margin-top: 1rem;
+  background-color: var(--red);
+  color: var(--lightred);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem;
+  border-radius: 5px;
+  > span {
+    font-size: 0.8rem;
+  }
+  > .warning-icon {
+    font-size: 2.4rem;
+    margin-right: 0.6rem;
+  }
 `;
