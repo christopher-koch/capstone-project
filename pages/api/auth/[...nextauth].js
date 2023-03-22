@@ -14,7 +14,7 @@ export const authOptions = {
   callbacks: {
     async redirect() {
       signIn(undefined, {
-        callbackUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+        callbackUrl: process.env.NEXT_PUBLIC_VERCEL_URL,
       });
     },
   },
