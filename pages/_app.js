@@ -6,11 +6,15 @@ import { initialUrls } from "@/data/initial-urls";
 import Navi from "@/components/Navigation";
 import useSWR from "swr";
 import localFont from "next/font/local";
+import { SessionProvider } from "next-auth/react";
 
 const myFont = localFont({ src: "../next/font/local/Mona-Sans.woff2" });
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const {
     data: mongoData,
     error,
@@ -29,15 +33,17 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SWRConfig value={{ fetcher, refreshInterval: 5000 }}>
         <main className={myFont.className}>
-          <Component
-            {...pageProps}
-            shortUrls={shortUrls}
-            setShortUrls={setShortUrls}
-            mongoData={mongoData}
-            error={error}
-            isLoading={isLoading}
-            mutate={mutate}
-          />
+          <SessionProvider session={session}>
+            <Component
+              {...pageProps}
+              shortUrls={shortUrls}
+              setShortUrls={setShortUrls}
+              mongoData={mongoData}
+              error={error}
+              isLoading={isLoading}
+              mutate={mutate}
+            />
+          </SessionProvider>
         </main>
         <Navi />
       </SWRConfig>

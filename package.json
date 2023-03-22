@@ -14,6 +14,7 @@
     "eslint-config-next": "13.2.3",
     "mongoose": "^7.0.1",
     "next": "13.2.3",
+    "next-auth": "^4.20.1",
     "next-cloudinary": "^4.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
