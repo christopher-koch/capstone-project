@@ -11,5 +11,10 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  callbacks: {
+    async redirect() {
+      signIn(undefined, { callbackUrl: `/${NEXT_PUBLIC_VERCEL_URL}` });
+    },
+  },
 };
 export default NextAuth(authOptions);
