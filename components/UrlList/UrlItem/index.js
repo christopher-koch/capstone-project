@@ -19,15 +19,19 @@ export default function UrlItem({
 }) {
   const [editing, setEditing] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [spinner, setSpinner] = useState(false);
   const router = useRouter();
   const pathname = router.pathname;
 
   const handleDelete = async (e) => {
     if (pathname === "/") {
-      setSuccessForm(false);
+      //setSuccessForm(false);
     }
+    setSpinner(true);
     await fetch(`/api/${e.target.id}`, {
       method: "DELETE",
+    }).then(() => {
+      setSpinner(false);
     });
   };
 
@@ -103,7 +107,11 @@ export default function UrlItem({
         <StyledOptions>
           <div className="delete-container">
             <StyledDelete id={shortURL} onClick={(e) => handleDelete(e)}>
-              <VscTrash className="icon" />
+              {spinner === true ? (
+                <p>es lädt</p>
+              ) : (
+                <VscTrash className="icon" />
+              )}
             </StyledDelete>
           </div>
           {editing === false ? null : (
