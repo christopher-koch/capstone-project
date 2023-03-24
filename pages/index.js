@@ -20,7 +20,6 @@ export default function Home({
   mutate,
 }) {
   const [successForm, setSuccessForm] = useState(false);
-  //const { mutate } = useSWR(`/api/urls`);
   const [showPopup, setShowPopup] = useState(false);
   const { data: session } = useSession();
 
