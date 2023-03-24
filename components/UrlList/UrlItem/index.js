@@ -4,6 +4,7 @@ import { VscTrash } from "react-icons/vsc";
 import { VscEdit } from "react-icons/vsc";
 import { VscCopy } from "react-icons/vsc";
 import { VscError } from "react-icons/vsc";
+import { VscDebugRestart } from "react-icons/vsc";
 import SuccessInfo from "@/components/SuccessInfo";
 import { useRouter } from "next/router";
 
@@ -19,6 +20,8 @@ export default function UrlItem({
 }) {
   const [editing, setEditing] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [spinnerDelete, setSpinnerDelete] = useState(false);
+  const [spinnerEdit, setSpinnerEdit] = useState(false);
   const router = useRouter();
   const pathname = router.pathname;
 
@@ -26,9 +29,16 @@ export default function UrlItem({
     if (pathname === "/") {
       setSuccessForm(false);
     }
+    setSpinnerDelete(true);
     await fetch(`/api/${e.target.id}`, {
       method: "DELETE",
-    });
+    })
+      .then(() => {
+        mutate();
+      })
+      .then(() => {
+        setSpinnerDelete(false);
+      });
   };
 
   const handleEdit = () => {
@@ -37,6 +47,7 @@ export default function UrlItem({
 
   const handleEditDone = async (e) => {
     if (e.key === "Enter") {
+      setSpinnerEdit(true);
       setEditing(!editing);
       await fetch(`/api/${e.target.id}`, {
         method: "PUT",
@@ -44,16 +55,13 @@ export default function UrlItem({
         headers: {
           "Content-Type": "application/json",
         },
-      });
-      /* setShortUrls(
-        shortUrls.map((url) => {
-          if (url.id === id) {
-            return { ...url, shortURL: event.target.value };
-          } else {
-            return url;
-          }
+      })
+        .then(() => {
+          mutate();
         })
-      ); */
+        .then(() => {
+          setSpinnerEdit(false);
+        });
     }
   };
 
@@ -103,7 +111,11 @@ export default function UrlItem({
         <StyledOptions>
           <div className="delete-container">
             <StyledDelete id={shortURL} onClick={(e) => handleDelete(e)}>
-              <VscTrash className="icon" />
+              {spinnerDelete === true ? (
+                <VscDebugRestart className="icon icon-spin" />
+              ) : (
+                <VscTrash className="icon" />
+              )}
             </StyledDelete>
           </div>
           {editing === false ? null : (
@@ -113,6 +125,7 @@ export default function UrlItem({
                 id={shortURL}
                 placeholder={shortURL}
                 type="text"
+                autoFocus
                 onKeyDown={(e) => handleEditDone(e, id)}
               />
             </StyledEditContainer>
@@ -123,7 +136,11 @@ export default function UrlItem({
             </StyledEditReset>
           ) : (
             <StyledEdit id={shortURL} onClick={() => handleEdit()}>
-              <VscEdit />
+              {spinnerEdit === true ? (
+                <VscDebugRestart className="icon icon-spin" />
+              ) : (
+                <VscEdit />
+              )}
             </StyledEdit>
           )}
 
@@ -194,6 +211,9 @@ const StyledShortUrl = styled.span`
   border: 2px solid var(--text);
   border-radius: 2px;
   box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledCopyButton = styled.button`

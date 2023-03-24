@@ -31,7 +31,7 @@ export default function App({
       <Head>
         <title>Capstone Project</title>
       </Head>
-      <SWRConfig value={{ fetcher, refreshInterval: 5000 }}>
+      <SWRConfig value={{ fetcher }}>
         <main className={myFont.className}>
           <SessionProvider session={session}>
             <Component

@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 export default function Account() {
   const { data: session } = useSession();
-  console.log(session);
   const router = useRouter();
 
   async function addUserToDatabase() {
