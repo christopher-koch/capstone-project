@@ -22,7 +22,6 @@ export default function Home({
   const { mutate } = useSWR(`/api/urls`);
   const [showPopup, setShowPopup] = useState(false);
   const { data: session } = useSession();
-  console.log(session);
 
   if (error)
     return (

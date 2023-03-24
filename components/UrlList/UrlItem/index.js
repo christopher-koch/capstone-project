@@ -32,6 +32,7 @@ export default function UrlItem({
       method: "DELETE",
     }).then(() => {
       setSpinner(false);
+      console.log(fetch(`/api/${e.target.id}`));
     });
   };
 
