@@ -4,8 +4,13 @@ import useSWR from "swr";
 import { useSession, sign } from "next-auth/react";
 import Link from "next/link";
 
-export default function UrlList({ shortUrls, setShortUrls, mutate }) {
-  const { data: mongoData, error, isLoading } = useSWR(`/api/urls`);
+export default function UrlList({
+  shortUrls,
+  setShortUrls,
+  mutate,
+  mongoData,
+}) {
+  const { error, isLoading } = useSWR(`/api/urls`);
   const { data: session } = useSession();
 
   if (error) return <div>failed to load</div>;

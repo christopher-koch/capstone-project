@@ -17,9 +17,10 @@ export default function Home({
   error,
   isLoading,
   mongoData,
+  mutate,
 }) {
   const [successForm, setSuccessForm] = useState(false);
-  const { mutate } = useSWR(`/api/urls`);
+  //const { mutate } = useSWR(`/api/urls`);
   const [showPopup, setShowPopup] = useState(false);
   const { data: session } = useSession();
 
@@ -137,6 +138,7 @@ export default function Home({
           shortUrls={shortUrls}
           setShortUrls={setShortUrls}
           setSuccessForm={setSuccessForm}
+          mutate={mutate}
         />
       )}
     </main>

@@ -1,7 +1,12 @@
 import UrlList from "@/components/UrlList";
 import styled from "styled-components";
 
-export default function Dashboard({ shortUrls, setShortUrls, mutate }) {
+export default function Dashboard({
+  shortUrls,
+  setShortUrls,
+  mutate,
+  mongoData,
+}) {
   return (
     <>
       <main className="main-container">
@@ -13,6 +18,7 @@ export default function Dashboard({ shortUrls, setShortUrls, mutate }) {
           shortUrls={shortUrls}
           setShortUrls={setShortUrls}
           mutate={mutate}
+          mongoData={mongoData}
         />
       </main>
     </>
