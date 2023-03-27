@@ -107,8 +107,6 @@ export default function UrlItem({
           <StyledCopyButton onClick={handleCopy}>
             <VscCopy />
           </StyledCopyButton>
-          <p>{process.env.NEXT_PUBLIC_OFFICIAL_DOMAIN}</p>
-          <p>{process.env.NEXT_PUBLIC_VERCEL_URL}</p>
         </StyledShortUrl>
         <StyledOptions>
           <div className="delete-container">
