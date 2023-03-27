@@ -103,7 +103,7 @@ export default function UrlItem({
           target="_blank"
           onClick={(e) => handleLinkClick(e)}
         >
-          {process.env.NEXT_PUBLIC_VERCEL_URL}/{shortURL}
+          {process.env.OFFICIAL_DOMAIN}/{shortURL}
           <StyledCopyButton onClick={handleCopy}>
             <VscCopy />
           </StyledCopyButton>
