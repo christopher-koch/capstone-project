@@ -66,9 +66,7 @@ export default function UrlItem({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`
-    );
+    navigator.clipboard.writeText(`${process.env.OFFICIAL_DOMAIN}/${shortURL}`);
     setCopySuccess(true);
   };
   useEffect(() => {
