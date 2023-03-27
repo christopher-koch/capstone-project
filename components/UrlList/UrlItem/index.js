@@ -67,7 +67,7 @@ export default function UrlItem({
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortURL}`
+      `${process.env.NEXT_PUBLIC_OFFICIAL_DOMAIN}/${shortURL}`
     );
     setCopySuccess(true);
   };
@@ -103,7 +103,7 @@ export default function UrlItem({
           target="_blank"
           onClick={(e) => handleLinkClick(e)}
         >
-          {process.env.NEXT_PUBLIC_VERCEL_URL}/{shortURL}
+          {process.env.NEXT_PUBLIC_OFFICIAL_DOMAIN}/{shortURL}
           <StyledCopyButton onClick={handleCopy}>
             <VscCopy />
           </StyledCopyButton>
