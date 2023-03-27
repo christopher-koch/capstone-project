@@ -66,7 +66,9 @@ export default function UrlItem({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`${process.env.OFFICIAL_DOMAIN}/${shortURL}`);
+    navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_OFFICIAL_DOMAIN}/${shortURL}`
+    );
     setCopySuccess(true);
   };
   useEffect(() => {
@@ -101,10 +103,12 @@ export default function UrlItem({
           target="_blank"
           onClick={(e) => handleLinkClick(e)}
         >
-          {process.env.OFFICIAL_DOMAIN}/{shortURL}
+          {process.env.NEXT_PUBLIC_OFFICIAL_DOMAIN}/{shortURL}
           <StyledCopyButton onClick={handleCopy}>
             <VscCopy />
           </StyledCopyButton>
+          <p>{process.env.NEXT_PUBLIC_OFFICIAL_DOMAIN}</p>
+          <p>{process.env.NEXT_PUBLIC_VERCEL_URL}</p>
         </StyledShortUrl>
         <StyledOptions>
           <div className="delete-container">
