@@ -20,6 +20,7 @@ export default function Popup({ setShowPopup }) {
         src={SuccessKid}
         width={320}
         height={240}
+        role={"image"}
       />
       <Banner direction={"reversed"} />
     </StyledPopupContainer>

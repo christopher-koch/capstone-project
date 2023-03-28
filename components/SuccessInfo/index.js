@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function SuccessInfo() {
   return (
     <StyledContainer>
-      <span>Copied Successfully</span>
+      <span role={"success"}>Copied Successfully</span>
     </StyledContainer>
   );
 }
