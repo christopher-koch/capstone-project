@@ -17,7 +17,6 @@ export default function Navi() {
             className={currentRoute === "/" ? "active" : "inactive"}
           >
             <CiHome
-              role={"icon"}
               className={
                 currentRoute === "/" ? "icon-nav-active icon-nav" : "icon-nav"
               }
@@ -30,7 +29,6 @@ export default function Navi() {
             className={currentRoute === "/account" ? "active" : "inactive"}
           >
             <CiUser
-              role={icon}
               className={
                 currentRoute === "/account"
                   ? "icon-nav-active icon-nav"
@@ -41,7 +39,6 @@ export default function Navi() {
         </li>
         <li>
           <StyledLink
-            role={icon}
             href="/dashboard"
             className={currentRoute === "/dashboard" ? "active" : "inactive"}
           >
