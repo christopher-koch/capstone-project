@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Banner({ direction }) {
   return (
     <StyledContainer>
-      <StyledText className={direction}>
+      <StyledText role={"heading"} className={direction}>
         AMAZING! AMAZING! AMAZING! AMAZING! AMAZING!
       </StyledText>
     </StyledContainer>
